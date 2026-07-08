@@ -58,6 +58,10 @@ services:
     command: >
       sh -c "
         bundle install &&
+        until mysqladmin ping -h db -u root -prootpassword --silent; do
+          echo 'Waiting for MySQL database to become available...'
+          sleep 2
+        done &&
         rails db:migrate &&
         rails db:seed &&
         rails server -b 0.0.0.0
