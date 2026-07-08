@@ -10,6 +10,7 @@
 # Ignore all logfiles and tempfiles.
 /backend/log/*
 /backend/tmp/*
+/backend/vendor/bundle/
 !/backend/log/.keep
 !/backend/tmp/.keep
 
