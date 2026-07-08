@@ -44,6 +44,9 @@ services:
       DATABASE_NAME: expense_system_development
       DATABASE_USERNAME: expense_user
       DATABASE_PASSWORD: expense_password
+      GEM_HOME: "/rails/vendor/bundle/ruby/3.3.0"
+      BUNDLE_PATH: "/rails/vendor/bundle"
+      PATH: "/rails/vendor/bundle/ruby/3.3.0/bin:/rails/vendor/bundle/bin:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
     ports:
       - "3000:3000"
     depends_on:
