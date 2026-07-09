@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_18_000002) do
     t.decimal "amount", precision: 10, scale: 2, null: false
     t.date "date", default: -> { "(curdate())" }, null: false
     t.integer "category_id", null: false
-    t.string "payer_name", limit: 100, null: false
+    t.string "payer_name", limit: 100
     t.timestamp "created_at", default: -> { "CURRENT_TIMESTAMP" }
     t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" }
     t.index ["category_id"], name: "idx_category_id"
