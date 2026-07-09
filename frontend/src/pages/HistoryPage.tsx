@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getExpenses, createExpense } from "../services/api";
+import { getExpenses, createExpense, fetchCategories } from "../services/api";
 import { Expense, ExpenseFormData } from "../types";
 import YearNavigation from "../components/YearNavigation";
 import { MonthNavigation } from "../components/MonthNavigation";
@@ -13,6 +13,9 @@ const HistoryPage: React.FC = () => {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentCategories, setCurrentCategories] = useState<
+    Array<{ id: number; name: string }>
+  >([]);
 
   // Get year and month from URL params, default to current date if not provided
   const getInitialYearMonth = () => {
@@ -43,6 +46,15 @@ const HistoryPage: React.FC = () => {
   // Initialize URL params if not present
   useEffect(() => {
     updateURL(selectedYear, selectedMonth);
+
+    async function getCategories() {
+      await fetchCategories().then((data) => {
+        const categoryNames = data.map((cat) => cat.name);
+        setCurrentCategories(categoryNames);
+      });
+    }
+
+    getCategories();
   }, []);
 
   useEffect(() => {
@@ -187,6 +199,7 @@ const HistoryPage: React.FC = () => {
         <ExpenseForm
           onSubmit={handleAddExpense}
           onCancel={() => setIsModalOpen(false)}
+          expenseCategories={currentCategories}
         />
       </Modal>
     </div>
