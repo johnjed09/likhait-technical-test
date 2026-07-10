@@ -44,6 +44,9 @@ services:
       DATABASE_NAME: expense_system_development
       DATABASE_USERNAME: expense_user
       DATABASE_PASSWORD: expense_password
+      GEM_HOME: "/rails/vendor/bundle/ruby/3.3.0"
+      BUNDLE_PATH: "/rails/vendor/bundle"
+      PATH: "/rails/vendor/bundle/ruby/3.3.0/bin:/rails/vendor/bundle/bin:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
     ports:
       - "3000:3000"
     depends_on:
@@ -55,6 +58,10 @@ services:
     command: >
       sh -c "
         bundle install &&
+        until mysqladmin ping -h db -u root -prootpassword --silent; do
+          echo 'Waiting for MySQL database to become available...'
+          sleep 2
+        done &&
         rails db:migrate &&
         rails db:seed &&
         rails server -b 0.0.0.0
