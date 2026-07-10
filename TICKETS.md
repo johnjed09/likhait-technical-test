@@ -22,6 +22,20 @@ Newly added expenses should appear at the top of the expense table, ordered by t
 4. Observe the expense list after the page reloads
 5. Notice the new expense is not at the top of the list
 
+### 🔬 QA Investigation & Resolution (Closed / Not Reproducible)
+
+- **Status:** Closed — Unable to Reproduce
+
+#### ⚠️ Pre-requisites
+
+- **Environment Dependency:** This verification requires the container orchestration and test suite updates introduced in `bugfix/fix-environment-and-test-suite` (PR #1).
+- **Verification Order:** Ensure the environment stabilization PR (#1) is running first to establish a stable local runtime context before conducting manual or automated QA passes on this ticket.
+
+#### 🔍 Verification Details
+
+- **Observed Behavior:** Followed the reproduction steps sequentially using the stabilized application runtime. Newly created expenses correctly default to the top of the history collection table, sorting fluidly by expense date in descending order out of the box.
+- **Code Audit:** Evaluated the backend query builders and frontend array manipulation layers; the correct descending logic is already structurally intact. No production code changes were required to satisfy this ticket constraint.
+
 ---
 
 ## FEATURE-001: Add Category Management Feature
