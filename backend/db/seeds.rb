@@ -111,6 +111,8 @@ expense_templates = {
   ]
 }
 
+payers = ['Alice', 'Bob', 'Charlie']
+
 # Start date: January 1, 2024
 # End date: February 18, 2026
 start_date = Date.new(2024, 1, 1)
@@ -146,6 +148,7 @@ while current_date <= end_date
         amount: amount,
         category: category,
         date: current_date,
+        payer_name: payers.sample,
         created_at: current_date,
         updated_at: current_date
       )
